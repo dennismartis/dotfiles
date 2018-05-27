@@ -100,3 +100,4 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source  ~/powerlevel9k/powerlevel9k.zsh-theme
 prompt_context() {}
+alias vim='/usr/local/Cellar/vim/8.1.0001/bin/vim'
