@@ -56,8 +56,8 @@ set pastetoggle=<F11>
 
 " Indentation settings for using 4 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
