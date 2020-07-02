@@ -1,70 +1,83 @@
-" Attempt to determine the type of a file based on its name and possibly its
-" contents. Use this to allow intelligent auto-indenting for each filetype,
-" and for plugins that are filetype specific.
-filetype indent plugin on
+set nocompatible           " disable backwards compatibility with vi
+filetype plugin indent on  " enable filetype plugins and indent
+syntax enable              " enable syntax highlighting
+set incsearch              " highlight matches as you type
+set hlsearch               " highlight matches once a search is complete
+set clipboard=unnamed      " use system clipboard
 
-" Enable syntax highlighting
-syntax on
+" map leader to space
+map <Space> <Leader>
 
-" Better command-line completion
-set wildmenu
+" faster navigation
+nnoremap H ^	" goto start of line
+nnoremap L g_
+nnoremap J 5j
+nnoremap K 5k
+vnoremap J 5j
+vnoremap K 5k
+nnoremap <Leader>j J
+nnoremap <Leader>k K
 
-" Show partial commands in the last line of the screen
-set showcmd
+" Improved window navigation
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-\> <c-w>w
 
-" Highlight searches (use <C-L> to temporarily turn off highlighting; see the
-" mapping of <C-L> below)
-set hlsearch
-" Use case insensitive search, except when using capital letters
-set ignorecase
-set smartcase
+" clear search highlight
+nnoremap <Leader><Space> :noh<CR>
 
-" Allow backspacing over autoindent, line breaks and start of insert action
-set backspace=indent,eol,start
+" Create new tab with no name
+map <Leader>tt :tabedit<CR>
+" " Create new tab with a file for editing
+" " Since there's no <CR> it allows you to specify a filename.
+" " The name of a new file to create or an existing one.
+map <Leader>te :tabedit
+" " Close all tabs but the active one
+map <Leader>to :tabonly<CR>
 
-" When opening a new line and no filetype-specific indenting is enabled, keep
-" the same indent as the line you're currently on. Useful for READMEs, etc.
-set autoindent
+" map ; to :
+nnoremap ; :
+"
+" " Remember that ; and , where used to repeat character searches
+" " fix command that you shadowed with the prevoius one
+nnoremap <Leader>; ;
+" " for symmetry add the following command
+nnoremap <Leader>, ,
 
-" Stop certain movements from always going to the first character of a line.
-" While this behaviour deviates from that of Vi, it does what most users
-" coming from other editors would expect.
-set nostartofline
+" Toggle paste mode
+set pastetoggle=<F2>
 
-" Display the cursor position on the last line of the screen or in the status
-" line of a window
-set ruler
-  
-" Always display the status line, even if only one window is displayed
+nnoremap <leader>p "*p
+
+" Replace all is aliased to S
+nnoremap S :%s//g<Left><Left>
+
+" Enable statusline
 set laststatus=2
 
-" Use visual bell instead of beeping when doing something wrong
-set visualbell
 
-" And reset the terminal code for the visual bell. If visualbell is set, and
-" this line is also included, vim will neither flash nor beep. If visualbell
-" is unset, this does nothing.
-set t_vb=
-
-" Enable use of the mouse for all modes
-set mouse=a
-
-set number relativenumber
-
-" Use <F11> to toggle between 'paste' and 'nopaste'
-set pastetoggle=<F11>
-
-" Indentation settings for using 4 spaces instead of tabs.
-" Do not change 'tabstop' from its default value of 8 with this setup.
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
-" which is the default
-map Y y$
-
-" Map <C-L> (redraw screen) to also turn off search highlighting until the
-" next search
-nnoremap <C-L> :nohl<CR><C-L>
+set statusline=
+set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ RPLACE\ ':''}
+set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+set statusline+=\ %n\           " buffer number
+set statusline+=%#Visual#       " colour
+set statusline+=%{&paste?'\ PASTE\ ':''}
+set statusline+=%{&spell?'\ SPELL\ ':''}
+set statusline+=%#CursorIM#     " colour
+set statusline+=%R                        " readonly flag
+set statusline+=%M                        " modified [+] flag
+set statusline+=%#Cursor#               " colour
+set statusline+=%#CursorLine#     " colour
+set statusline+=\ %t\                   " short file name
+set statusline+=%=                          " right align
+set statusline+=%#CursorLine#   " colour
+set statusline+=\ %Y\                   " file type
+set statusline+=%#CursorIM#     " colour
+set statusline+=\ %3l:%-2c\         " line + column
+set statusline+=%#Cursor#       " colour
+set statusline+=\ %3p%%\                " percentage
 
